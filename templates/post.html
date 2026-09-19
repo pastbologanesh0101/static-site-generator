@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<article class="post">
+  <h1>{{ title }}</h1>
+  <p class="post-meta">
+    {% if date %}<time datetime="{{ date.strftime('%Y-%m-%d') }}">{{ date.strftime('%Y-%m-%d') }}</time>{% endif %}
+    {% if tags %}
+    <span class="post-tags">
+      {% for tag in tags %}<a href="/tags/{{ tag|lower }}/">{{ tag }}</a>{% if not loop.last %}, {% endif %}{% endfor %}
+    </span>
+    {% endif %}
+  </p>
+  {% if draft %}<p class="draft-banner">DRAFT &mdash; not published to listings or RSS</p>{% endif %}
+  <div class="post-body">
+    {{ content }}
+  </div>
+</article>
+{% endblock %}
